@@ -7,12 +7,14 @@ config.vm.provider "virtualbox" do |vb|
   vb.cpus = "2"
 end
 
-config.vm.provision "shell", path: "add_ssh_pub.sh"
 config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get update
-  sudo apt-get -y install postfix
-  sudo apt-get -y install dovecot-core dovecot-lmtpd dovecot-impad dovecot-pop3d
-  sudo apt-get -y install mail-utils
+  sudo apt-get -y install apache2
+  sudo apt-get -y install ntfs-utils
+  sudo systemctl start rpcbind
+  sudo systemctl enable rpcbind
+  sudo systemctl start nfs-server
+  sudo systemctl enable nfs-server
 SHELL
 end
 
