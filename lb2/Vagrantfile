@@ -24,8 +24,3 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo mkdir /data
 SHELL
 end
-
-config.vm.provision "shell", inline: <<-SHELL
-
-SHELL
-end
