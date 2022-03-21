@@ -6,6 +6,7 @@ config.vm.provider "virtualbox" do |vb|
   vb.memory = "512" 
   vb.cpus = "2"
 end
+
 config.vm.provision "shell", path: "add_ssh_pub.sh"
 config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get update
@@ -14,3 +15,4 @@ config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get -y install mail-utils
 SHELL
 end
+
