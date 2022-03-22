@@ -3,7 +3,10 @@ sudo apt-get -y install ufw
 sudo ufw enable
 sudo ufw allow 80/tcp
 
-cat >>/var/wwww/index.html<<EOF
+rm /var/www/html/index.html
+touch /var/www/html/index.html
+
+cat >>/var/www/html/index.html<<EOF
 <!DOCTYPE html>
 <html>
 <body>
