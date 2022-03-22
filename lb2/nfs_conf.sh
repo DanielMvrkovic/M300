@@ -16,3 +16,5 @@ sudo exportfs -a
 sudo systemctl enable nfs-server
 
 sudo systemctl start nfs-server
+
+sudo ufw allow 2049/tcp
