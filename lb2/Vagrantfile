@@ -14,14 +14,3 @@ SHELL
 config.vm.provision "shell", path: "apache_conf.sh"
 config.vm.provision "shell", path: "nfs_conf.sh"
 end
-
-Vagrant.configure(2) do |tt|
-  tt.vm.box = "ubuntu/bionic64"
-  tt.vm.network "private_network", ip: "192.168.10.30"
-  tt.vm.provider "virtualbox" do |v|
-    v.gui = true
-  end
-  tt.vm.provision "shell", inline: "sudo apt-get update"
-  tt.vm.provision "shell", inline: "sudo apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
-  tt.vm.provision "shell", inline: "sudo sed -i 's/allowed_users=.*$/allowed_users=anybody/' /etc/X11/Xwrapper.config"
-end
