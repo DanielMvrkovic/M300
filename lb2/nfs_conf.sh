@@ -1,5 +1,5 @@
-sudo apt-get install nfs-kernel-server 
-sudo apt-get install nfs-common
+sudo apt-get install -y nfs-kernel-server 
+sudo apt-get install -y nfs-common
 
 sudo mkdir -p /data/nfs/storage
 sudo mkdir -p /data/nfs/configs
