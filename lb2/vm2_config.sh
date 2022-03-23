@@ -17,3 +17,5 @@ cat >>/etc/crontab<<EOF
 */11 * * * *    root    cp /mnt/nfs-share/configs/apache/default-ssl.conf /backup/config_bk/default-ssl.conf.bk
 */11 * * * *    root    /scripts/log_backup.sh
 EOF
+
+sudo chmod -R 777 /scripts/log_backup.sh
