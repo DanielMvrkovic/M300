@@ -86,7 +86,8 @@
         const textToBLOB = new Blob([data], { type: 'text/plain' });
         const sFileName = Document + '.txt';	   // The file to save the data.
 
-        saveAs(textToBLOB, "/data/nfs" + sFileName + ".txt")
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
 
         if (window.webkitURL != null) {
             newLink.href = window.webkitURL.createObjectURL(textToBLOB);
@@ -97,7 +98,9 @@
             document.body.appendChild(newLink);
         }
 
-        newLink.click(); 
+        newLink.click();
+
+        
     }
 </script>
 </html>
