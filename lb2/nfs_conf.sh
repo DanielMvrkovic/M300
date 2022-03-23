@@ -1,15 +1,13 @@
 sudo apt-get install -y nfs-kernel-server 
 sudo apt-get install -y nfs-common
 
-sudo mkdir -p /data/nfs/storage
 sudo mkdir -p /data/nfs/configs
 sudo mkdir -p /data/nfs/logs
-sudo mkdir -p /data/nfs/documents
 
 chmod -R 777 /data/nfs
 
 cat >>/etc/exports<<EOF
-/data/nfs   *(rw,sync,no_root_squash,no_subtree_check)
+/data/nfs   192.168.10.30(rw,sync,no_root_squash,no_subtree_check)
 EOF
 
 sudo exportfs -a

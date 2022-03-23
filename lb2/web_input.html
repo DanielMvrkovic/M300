@@ -1,5 +1,4 @@
 //source = https://www.encodedna.com/javascript/how-to-save-form-data-in-a-text-file-using-javascript.htm
-//added some minor changes
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +89,6 @@
         let newLink = document.createElement("a");
         newLink.download = sFileName;
 
-        saveAs(textToBLOB, sFileName)
 
         if (window.webkitURL != null) {
             newLink.href = window.webkitURL.createObjectURL(textToBLOB);
