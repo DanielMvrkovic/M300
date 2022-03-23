@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
     tt.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update
       sudo mkdir -p /scripts
-      chmod -R 777 /data/nfs
+      chmod -R 777 /scripts
       sudo apt-get install -y nfs-common
     SHELL
     tt.vm.provision "file", source: "log_backup.sh", destination: "/scripts/log_backup.sh"
