@@ -67,7 +67,7 @@
     let saveFile = () => {
     	
         // Get the data from each element on the form.
-        const Document = document.getElementById('txtDocument')
+        const DocumentName = document.getElementById('txtDocument')
     	const name = document.getElementById('txtName');
         const age = document.getElementById('txtAge');
         const email = document.getElementById('txtEmail');
@@ -75,7 +75,7 @@
         const msg = document.getElementById('msg');
         
         // This variable stores all the data.
-        let NameDocu = Document.value
+        let NameDocu = DocumentName.value
         let data = 
             '\r Name: ' + name.value + ' \r\n ' + 
             'Age: ' +age.value + ' \r\n ' + 
@@ -85,10 +85,12 @@
         
         // Convert the text to BLOB.
         const textToBLOB = new Blob([data], { type: 'text/plain' });
-        const sFileName = Document + '.txt';	   // The file to save the data.
+        const sFileName = DocumentName + '.txt';	   // The file to save the data.
 
         let newLink = document.createElement("a");
         newLink.download = sFileName;
+
+        saveAs(textToBLOB, sFileName)
 
         if (window.webkitURL != null) {
             newLink.href = window.webkitURL.createObjectURL(textToBLOB);
@@ -101,7 +103,6 @@
 
         newLink.click();
 
-        
     }
 </script>
 </html>
