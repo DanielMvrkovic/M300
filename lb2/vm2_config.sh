@@ -1,4 +1,3 @@
-sudo apt update
 sudo apt install nfs-common
 
 sudo mkdir -p /mnt/nfs-share
@@ -8,3 +7,8 @@ cat >>/etc/fstab<<EOF
 EOF
 
 sudo mount /mnt/nfs-share
+
+sudo mdkir -p /backup
+sudo mkdir -p /backup/log_bp
+sudo mkdir -p /backup/config_bp
+

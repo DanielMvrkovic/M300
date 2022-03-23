@@ -13,6 +13,7 @@ Vagrant.configure(2) do |config|
     end
     wn.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update
+      sudo mkdir -p /scripts
     SHELL
     wn.vm.provision "shell", path: "apache_conf.sh"
     wn.vm.provision "shell", path: "nfs_conf.sh"
@@ -26,6 +27,12 @@ Vagrant.configure(2) do |config|
     tt.vm.provider "virtualbox" do |v|
       v.memory = "1024"
       v.cpus = "1"
+    end
+    wn.vm.provision "shell", inline: <<-SHELL
+      sudo apt-get update
+      sudo mkdir -p /scripts
+    SHELL
+    tt.vm.provision "shell", path "vm2_config.sh"
     end
   end
 end
