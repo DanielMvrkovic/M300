@@ -9,7 +9,7 @@ sudo mkdir -p /data/nfs/documents
 chmod -R 777 /data/nfs
 
 cat >>/etc/exports<<EOF
-/data/nfs   localhost   rw,sync,no_root_squash,no_subtree_check
+/data/nfs   *   rw,sync,no_root_squash,no_subtree_check
 EOF
 
 sudo exportfs -a
