@@ -14,5 +14,6 @@ sudo mkdir -p /backup/config_bk
 
 cat >>/etc/crontab<<EOF
 */11 * * * *    root    cp /mnt/nfs-share/configs/apache/apache2.conf /backup/config_bk/apache2.conf.bk
-*/11 * * * *    root    cp /data/nfs-share/configs/apache/default-ssl.conf /backup/config_bk/default-ssl.conf.bk
+*/11 * * * *    root    cp /mnt/nfs-share/configs/apache/default-ssl.conf /backup/config_bk/default-ssl.conf.bk
+*/11 * * * *    root    /scripts/log_backup.sh
 EOF
