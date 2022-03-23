@@ -2,7 +2,9 @@ sudo apt-get install -y nfs-kernel-server
 sudo apt-get install -y nfs-common
 
 sudo mkdir -p /data/nfs/configs
+sudo mkdir -p /data/nfs/configs/apache
 sudo mkdir -p /data/nfs/logs
+sudo mkdir -p /data/nfs/logs/apache
 
 chmod -R 777 /data/nfs
 

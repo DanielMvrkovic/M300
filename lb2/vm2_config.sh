@@ -9,6 +9,10 @@ EOF
 sudo mount /mnt/nfs-share
 
 sudo mdkir -p /backup
-sudo mkdir -p /backup/log_bp
-sudo mkdir -p /backup/config_bp
+sudo mkdir -p /backup/log_bk
+sudo mkdir -p /backup/config_bk
 
+cat >>/etc/crontab<<EOF
+*/11 * * * *    root    cp /mnt/nfs-share/configs/apache/apache2.conf /backup/config_bk/apache2.conf.bk
+*/11 * * * *    root    cp /data/nfs-share/configs/apache/default-ssl.conf /backup/config_bk/default-ssl.conf.bk
+EOF
