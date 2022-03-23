@@ -8,7 +8,7 @@ EOF
 
 sudo mount /mnt/nfs-share
 
-sudo mdkir -p /backup
+sudo mkdir -p /backup
 sudo mkdir -p /backup/log_bk
 sudo mkdir -p /backup/config_bk
 
