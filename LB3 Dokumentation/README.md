@@ -1,14 +1,23 @@
 # LB3 - Kubernetes extra Konfigurationen
-## Inhaltsverzeichnis 
-- Kubeadm init error fix
-- LoadBalancer(bzw. Metallb)
-    - Installation
-    - Konfiguration
-    - Services auf LoadBalancer umstellen
-    - Zusatz
-- Weave Scope dashboard
+## **Inhaltsverzeichnis**
 
-## Kubeadm init error fix
+- [LB3 - Kubernetes extra Konfigurationen](#lb3---kubernetes-extra-konfigurationen)
+  - [**Inhaltsverzeichnis**](#inhaltsverzeichnis)
+  - [**Kubeadm init error fix**](#kubeadm-init-error-fix)
+  - [**LoadBalancer(bzw. Metallb)**](#loadbalancerbzw-metallb)
+    - [**Installation**](#installation)
+    - [**Konfiguration**](#konfiguration)
+    - [**Services auf LoadBalancer umstellen**](#services-auf-loadbalancer-umstellen)
+    - [**Zusatz**](#zusatz)
+  - [**Weave Scope dashboard**](#weave-scope-dashboard)
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## **Kubeadm init error fix**
 Beim Initialisieren des Kubernetes Cluster kommt es zur folgender meldung
 
 ```
@@ -32,9 +41,14 @@ Eine Lösung wäre das File zu löschen und containerd neustarten.
 # systemctl restart containerd
 # kubeadm init
 ```
+<br>
+<br>
+<br>
+<br>
+<br>
 
-## LoadBalancer(bzw. Metallb)
-### Installation
+## **LoadBalancer(bzw. Metallb)**
+### **Installation**
 Ordner für den LoadBalancer erstellen.
 ```
 # mkdir $HOME/LoadBalancer
@@ -49,7 +63,11 @@ Zuletzt einen Pod für Metallb kreieren.
 ```
 # kubectl apply -f metallb.yaml
 ```
-### Konfiguration
+
+<br>
+<br>
+
+### **Konfiguration**
 Normalweise würde man eine BGP Konfiguration machen, da aber der Kubernetes Cluster nur lokal ist und es keinen Router gibt, wird deshalb die Layer 2 Konfiguration genutzt.
 
 Layer 2 ist die simpleste Konfiguration, es werden nur IPs benötigt. Die IPs müssen auch nicht auf network-interfaces der Nodes gebunden sein.
@@ -73,7 +91,11 @@ diese Konfiguration kann in einem yaml-file geschrieben werden und dann übernoh
 ```
 # kubectl apply -f metallb-configmap.yaml
 ```
-### Services auf LoadBalancer umstellen
+
+<br>
+<br>
+
+### **Services auf LoadBalancer umstellen**
 Um den LoadBalancer zu testen werde ich mit ihm, IPs an die nginx webserver verteilen. Um das hinzukriegen muss noch folgende zeile im nginx-silver.yaml file hinzugefügt werden.
 ```
 apiVersion: v1
@@ -119,7 +141,11 @@ nginx-nfs-silver-service   LoadBalancer   10.101.180.240   192.168.11.21   80:30
 ```
 Wie mann beim TYPE und EXTERNAL-IP sieht funktioniert er einwandfrei.
 
-### Zusatz
+<br>
+<br>
+<br>
+
+### **Zusatz**
 
 Zusätzlich habe ich noch die nginx services, jetzt wo sie auch externe-IPs haben, im "/etc/hosts" mit zusätzlichem hsotname eingetragen. Das sieht wie folgt aus:
 ```
@@ -127,7 +153,14 @@ Zusätzlich habe ich noch die nginx services, jetzt wo sie auch externe-IPs habe
 192.168.11.21 nfs-silver.k8s
 192.168.11.22 nfs-gold.k8s
 ```
-## Weave Scope dashboard
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## **Weave Scope dashboard**
 Weave Scope erlaubt es prozesse, pods, container, hosts und vieles mehr grafische auf einem Dashboard abzubilden. Das Dashboard über einen Webbrowser wie Chrome aufrufbar und ist einfach zum Installieren.
 
 Um Weave Scope zu installieren muss dieser befehl ausgeführt werden.
@@ -145,3 +178,10 @@ weave                  weave-scope-app             ClusterIP      10.106.214.187
 ```
 Damit ist das Dashboard erreichbar, hier noch ein paar snippets.
 
+![Bild](https://raw.githubusercontent.com/DanielMvrkovic/M300-Service/main/LB3%20Dokumentation/Screenshot_1.png)
+
+![Bild](https://raw.githubusercontent.com/DanielMvrkovic/M300-Service/main/LB3%20Dokumentation/Screenshot_2.png)
+
+![Bild](https://raw.githubusercontent.com/DanielMvrkovic/M300-Service/main/LB3%20Dokumentation/Screenshot_3.png)
+
+![Bild](https://raw.githubusercontent.com/DanielMvrkovic/M300-Service/main/LB3%20Dokumentation/Weave-scoper.png)
