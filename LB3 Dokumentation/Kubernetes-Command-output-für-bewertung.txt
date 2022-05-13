@@ -1,0 +1,93 @@
+[root@master nginx]# kubectl describe nodes | grep ID:
+  Machine ID:                 d7077427dd2e458fb1b2b7a34e2a84b0
+  System UUID:                9ba94d56-6901-edc7-13ef-fdfb5faa1fdb
+  Boot ID:                    d1b9ea5b-bc0b-4486-ad0f-15ce306955e8
+  Machine ID:                 d7077427dd2e458fb1b2b7a34e2a84b0
+  System UUID:                45634d56-a2a8-5fb5-45ba-9106e5ed141a
+  Boot ID:                    9f1162f2-9ca2-4442-9c7f-49e4d2b4d71b
+  Machine ID:                 d7077427dd2e458fb1b2b7a34e2a84b0
+  System UUID:                f10c4d56-09f9-23ef-09fc-6c98d43a4c71
+  Boot ID:                    0e89b42c-418a-4e66-ad9b-dd8e38e75cf9
+[root@master nginx]# kubectl get nodes -o wide
+NAME          STATUS     ROLES           AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE          KERNEL-VERSION          CONTAINER-RUNTIME
+master.k8s    Ready      control-plane   2d22h   v1.24.0   192.168.11.11   <none>        CentOS Stream 8   4.18.0-383.el8.x86_64   containerd://1.4.4
+worker1.k8s   NotReady   <none>          2d22h   v1.24.0   192.168.11.12   <none>        CentOS Stream 8   4.18.0-383.el8.x86_64   containerd://1.4.4
+worker2.k8s   Ready      <none>          2d22h   v1.24.0   192.168.11.13   <none>        CentOS Stream 8   4.18.0-383.el8.x86_64   containerd://1.4.4
+[root@master nginx]# kubectl get pods -A
+NAMESPACE        NAME                                           READY   STATUS              RESTARTS        AGE
+cert-manager     cert-manager-6868fddcb4-8bmbv                  1/1     Terminating         5 (11m ago)     66m
+cert-manager     cert-manager-6868fddcb4-w2w9h                  1/1     Running             0               5s
+cert-manager     cert-manager-cainjector-6d6bbc7965-8pps2       1/1     Running             0               5s
+cert-manager     cert-manager-cainjector-6d6bbc7965-s2wmr       1/1     Terminating         5 (11m ago)     66m
+cert-manager     cert-manager-webhook-59f66d6c7b-2xfbg          1/1     Terminating         3 (11m ago)     66m
+cert-manager     cert-manager-webhook-59f66d6c7b-ccmcq          0/1     Running             0               5s
+default          mysql-dcd64ddd4-csdff                          0/1     ContainerCreating   0               5s
+default          mysql-dcd64ddd4-zgg72                          1/1     Terminating         4 (11m ago)     66m
+default          nginx-nfs-gold-deployment-bc6c665d4-hh4l9      1/1     Terminating         3 (11m ago)     66m
+default          nginx-nfs-gold-deployment-bc6c665d4-zqhrk      1/1     Running             0               113s
+default          nginx-nfs-platin-deployment-667474f484-slsq8   1/1     Terminating         3 (11m ago)     66m
+default          nginx-nfs-silver-deployment-75cf9b5646-7hstt   1/1     Terminating         3 (11m ago)     66m
+default          nginx-nfs-silver-deployment-75cf9b5646-mcmp7   1/1     Running             0               2m11s
+jenkins          jenkins-7b586bdbcd-5zl5f                       1/1     Terminating         3 (11m ago)     66m
+jenkins          jenkins-7b586bdbcd-m8mhm                       1/1     Running             0               5s
+kube-system      coredns-6d4b75cb6d-kggjm                       1/1     Running             5 (9m ago)      9h
+kube-system      coredns-6d4b75cb6d-xb5n6                       1/1     Running             4 (9m ago)      9h
+kube-system      etcd-master.k8s                                1/1     Running             4 (9m ago)      2d22h
+kube-system      kube-apiserver-master.k8s                      1/1     Running             8 (9m ago)      2d22h
+kube-system      kube-controller-manager-master.k8s             1/1     Running             81 (11m ago)    2d22h
+kube-system      kube-flannel-ds-cvt94                          1/1     Running             4 (9m ago)      2d22h
+kube-system      kube-flannel-ds-xfrsw                          1/1     Running             8 (9m3s ago)    2d22h
+kube-system      kube-flannel-ds-xzq9h                          1/1     Running             7 (7m23s ago)   2d22h
+kube-system      kube-proxy-5d4tc                               1/1     Running             5 (11m ago)     2d22h
+kube-system      kube-proxy-6zsks                               1/1     Running             4 (9m ago)      2d22h
+kube-system      kube-proxy-nsb8k                               1/1     Running             5 (11m ago)     2d22h
+kube-system      kube-scheduler-master.k8s                      1/1     Running             81 (9m ago)     2d22h
+metallb-system   controller-7476b58756-4jwb4                    0/1     ContainerCreating   0               5s
+metallb-system   speaker-knkns                                  1/1     Running             7 (11m ago)     2d5h
+metallb-system   speaker-m62ft                                  1/1     Running             5 (11m ago)     2d5h
+weave-scope      weave-scope-agent-zkpgs                        1/1     Terminating         3 (11m ago)     109m
+weave-scope      weave-scope-app-6996cfd49b-bjrhk               1/1     Terminating         3 (11m ago)     66m
+weave            weave-scope-agent-9hqf9                        1/1     Running             1 (9m ago)      17m
+weave            weave-scope-agent-hbwwd                        1/1     Running             0               17m
+weave            weave-scope-agent-q4pnn                        1/1     Running             0               17m
+weave            weave-scope-app-6996cfd49b-gltcl               1/1     Running             0               17m
+weave            weave-scope-cluster-agent-7b566bddd7-44ntz     1/1     Running             0               17m
+[root@master nginx]# kubectl get service -A
+NAMESPACE      NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                  AGE
+cert-manager   cert-manager               ClusterIP      10.108.111.247   <none>          9402/TCP                 2d2h
+cert-manager   cert-manager-webhook       ClusterIP      10.101.94.57     <none>          443/TCP                  2d2h
+default        kubernetes                 ClusterIP      10.96.0.1        <none>          443/TCP                  2d22h
+default        mysql                      ClusterIP      None             <none>          3306/TCP                 2d7h
+default        mysql-service              NodePort       10.96.173.26     <none>          3306:30914/TCP           2d7h
+default        nginx-nfs-gold-service     LoadBalancer   10.104.26.68     192.168.11.20   80:30327/TCP             2m15s
+default        nginx-nfs-silver-service   LoadBalancer   10.104.140.59    192.168.11.21   80:32169/TCP             2m33s
+jenkins        jenkins                    NodePort       10.101.223.131   <none>          8080:32277/TCP           2d7h
+kube-system    kube-dns                   ClusterIP      10.96.0.10       <none>          53/UDP,53/TCP,9153/TCP   2d22h
+weave          weave-scope-app            ClusterIP      10.111.16.80     <none>          80/TCP                   21m
+weave          weave-scope-dashboard      NodePort       10.100.241.46    <none>          4040:32168/TCP           6m49s
+[root@master nginx]# kubectl get deployments.apps -A
+NAMESPACE        NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
+cert-manager     cert-manager                  1/1     1            1           2d2h
+cert-manager     cert-manager-cainjector       1/1     1            1           2d2h
+cert-manager     cert-manager-webhook          1/1     1            1           2d2h
+default          mysql                         1/1     1            1           2d7h
+default          nginx-nfs-gold-deployment     1/1     1            1           2m38s
+default          nginx-nfs-silver-deployment   1/1     1            1           2m56s
+jenkins          jenkins                       1/1     1            1           2d7h
+kube-system      coredns                       2/2     2            2           2d22h
+metallb-system   controller                    1/1     1            1           2d5h
+weave            weave-scope-app               1/1     1            1           21m
+weave            weave-scope-cluster-agent     1/1     1            1           21m
+[root@master nginx]# kubectl get persistentvolume
+NAME            CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+pv-nfs-gold     5Gi        RWX            Recycle          Bound    default/pvc-nfs-gold     gold                    2d7h
+pv-nfs-mysql    2Gi        RWO            Retain           Bound    default/pvc-nfs-mysql    mysql                   2d7h
+pv-nfs-platin   1Gi        RWX            Recycle          Bound    default/pvc-nfs-platin   platin                  2d7h
+pv-nfs-silver   5Gi        RWX            Recycle          Bound    default/pvc-nfs-silver   silver                  2d7h
+[root@master nginx]# curl nginx-silver
+curl: (6) Could not resolve host: nginx-silver
+[root@master nginx]# curl 192.168.11.20
+^C
+[root@master nginx]# curl 192.168.11.21
+curl: (7) Failed to connect to 192.168.11.21 port 80: No route to host
+[root@master nginx]# 
